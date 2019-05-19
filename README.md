@@ -1,5 +1,5 @@
 # Strzelanka
-Gra będzie polegała na kierowaniu postacią z klawiaturą i strzelaniem za pomocą z myszki.\
+Gra będzie polegała na kierowaniu postacią klawiaturą i strzelaniem za pomocą z myszki.\
 Widok z góry, na planszy losowo pojawiające się postacie, chodzące w losowych kierunkach.\
 Zadaniem gracza jest ustrzelenie wszystkich postaci w jak najkrótszym czasie.
 Gra będzie zawierała klasy:
