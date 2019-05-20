@@ -8,3 +8,4 @@ Gra będzie zawierała klasy:
 2. **cBohater** - Zawiera informacje o bohaterze: ilość jego życia, liczbe naboi itp.
 3. **cPrzeciwnik** - Klasa bazowa przeciwników, zawiera informacje : stan życia, ich położenie itp.
 4. **cStrzelec** - Klasa przeciwnika dziedzicząca z klasy bazowej, jest od niej rozszerzona o metode strzał. 
+5. **cPszeszkoda** - Klasa bazowa pszeszkód, z której potem będą dziedziczyć klasy: cMurek, cOgień itp.
