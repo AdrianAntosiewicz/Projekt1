@@ -1,10 +1,10 @@
 # Strzelanka
-Gra będzie polegała na kierowaniu postacią klawiaturą i strzelaniem za pomocą z myszki.\
-Widok z góry, na planszy losowo pojawiające się postacie, chodzące w losowych kierunkach.\
-Zadaniem gracza jest ustrzelenie wszystkich postaci w jak najkrótszym czasie.
+- Gra z kamerą z góry. Zadaniem gracza będzie ustrzelenie wszystkich przeciwników w pokoju i przejście do następnego pomieszczenia 
+- Przeciwnicy pojawiają się w losowych miejscach i poruszają w losowym kierunku. Po przejściu do następnego pomieszczenia pojawiają się trudniejsi przeciwnicy, np. potrafią strzelać. 
+- Sterowanie postacią za pomocą WSAD, strzał za pomocą spacji w kierunku ostatniego wcisniętego klawisza ruchu (tekstura postaci będzie przedstawiała jej zwrot, czyli kierunek w jakim padnie strzał).\
+
 Gra będzie zawierała klasy:
 1. **cScena** - Odpowiedzialna za rysowanie planszy z postaciami
 2. **cBohater** - Zawiera informacje o bohaterze: ilość jego życia, liczbe naboi itp.
-3. **cPrzeciwnik** - Zawiera informacje o przecwinikach: stan życia, ich położenie itp.
-
-
+3. **cPrzeciwnik** - Klasa bazowa przeciwników, zawiera informacje : stan życia, ich położenie itp.
+4. **cStrzelec** - Klasa przeciwnika dziedzicząca z klasy bazowej, jest od niej rozszerzona o metode strzał. 
