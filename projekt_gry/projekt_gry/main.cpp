@@ -3,12 +3,14 @@
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include <vector>
+#include"cBohater.h"
 using namespace sf;
 using namespace std;
 
 
 int main() {
-	RenderWindow window{ VideoMode(800,600),"Arkanoid" };
+	cBohater Bohater(400, 300, 100, 100);
+	RenderWindow window{ VideoMode(1920,1080),"Gra" };
 	window.setFramerateLimit(60);
 	Event event;
 	while (true) {
@@ -18,6 +20,8 @@ int main() {
 			window.close();
 			break;
 		}
+		Bohater.uptade();
+		window.draw(Bohater);
 		window.display();
 	}
 
