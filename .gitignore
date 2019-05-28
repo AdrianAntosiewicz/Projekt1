@@ -6,3 +6,10 @@ projekt_gry/.vs/projekt_gry/v15/.suo
 *.user
 *.opendb
 *.ipch
+*.log
+*.tlog
+*.idb
+*.pdb
+*.exe
+*.ilk
+*.obj
