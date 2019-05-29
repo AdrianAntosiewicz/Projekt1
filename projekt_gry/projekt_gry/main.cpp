@@ -6,43 +6,44 @@
 #include <time.h>
 #include"cBohater.h"
 #include "cMinion.h"
+#include"cPrzeciwnik.h"
 using namespace sf;
 using namespace std;
 
 
 int main() {
 	cBohater Bohater(400, 300, 100, 100);
-	vector<cMinion> miniony;
-	miniony.push_back(cMinion(1000, 400, 50, 50, 2, 1));
-	miniony.push_back(cMinion(1000, 700, 50, 50, 2, 1));
+	vector<cPrzeciwnik*> przeciwnicy;
+	przeciwnicy.push_back(new cMinion(1000, 400, 50, 50, 2, 1));
+	przeciwnicy.push_back(new cMinion(1000, 700, 50, 50, 2, 1));
 	RenderWindow window{ VideoMode(1920,1080),"Gra" };
-	window.setFramerateLimit(50);
+	window.setFramerateLimit(60);
 	Event event;
 	srand(time(0));
-	clock_t start, koniec;
-	int ok = 1;
+	int frame = 0;
 	while (true) {
-		if (ok == 1) {
-			start = clock();
-			ok = 0;
-		}		
-		if (clock()-start > 1000) {
-			ok = 1;
-			for (int i = 0; i < miniony.size(); i++) {
+		frame++;
+		//--Nadawanie losowej prêdkoœci przeciwnikom
+		if (frame > 59) {
+			for (int i = 0; i < przeciwnicy.size(); i++) {
 				int los = rand() % 4;
-				miniony[i].uptade(los);
+				przeciwnicy[i]->uptade(los);
 			}
+			frame = 0;
 		}
+
 		window.clear(Color::Black);
 		window.pollEvent(event);
 		if (event.type == Event::Closed) {
 			window.close();
 			break;
 		}
+
 		Bohater.uptade();
-		for (int i = 0; i < miniony.size(); i++) {
-			miniony[i].ruch();
-			if (Bohater.kolizja(miniony[i].get_shape())) {
+		//Sprawdzanie kolizji Bohatera z przeciwnikami i wywo³ywanie metody shape.move u przeciwikow
+		for (int i = 0; i < przeciwnicy.size(); i++) {
+			przeciwnicy[i]->ruch();
+			if (Bohater.kolizja(przeciwnicy[i]->get_shape())) {
 				if(Bohater.get_last_click()=='d')
 					Bohater.set_vx(-30);
 				if (Bohater.get_last_click() == 'a')
@@ -53,9 +54,10 @@ int main() {
 					Bohater.set_vy(-30);
 			}
 		}
-		window.draw(Bohater);
-		for (auto el : miniony) {
-			window.draw(el);
+		//Rysowanie obiektów
+		window.draw(Bohater.get_shape());
+		for (auto el : przeciwnicy) {
+			window.draw(el->get_shape());
 		}
 		window.display();
 	}

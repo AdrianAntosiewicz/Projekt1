@@ -6,10 +6,6 @@ cBohater::cBohater(double x, double y, float a, float b) : x_(x), y_(y), a_(a), 
 	shape.setFillColor(Color::Red);
 	shape.setOrigin(a / 2, b / 2);
 }
-
-void cBohater::draw(RenderTarget& target, RenderStates state) const {
-	target.draw(shape, state);
-}
 void cBohater::uptade() {
 	shape.move(Vx, Vy);
 	if (Keyboard::isKeyPressed(Keyboard::Key::A) && this->left() > 0) {

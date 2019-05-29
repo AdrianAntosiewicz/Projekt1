@@ -6,7 +6,3 @@ cPrzeciwnik::cPrzeciwnik(double x, double y, float a, float b, int life, double 
 	shape.setFillColor(Color::Green);
 	shape.setOrigin(a / 2, b / 2);
 }
-
-void cPrzeciwnik::draw(RenderTarget& target, RenderStates state) const {
-	target.draw(shape, state);
-}

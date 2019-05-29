@@ -4,13 +4,12 @@
 using namespace std;
 using namespace sf;
 
-class cBohater : public Drawable {
+class cBohater {
 	RectangleShape shape;
 	double x_, y_, a_, b_;
 	double Basic_velocity{ 6 }, Vx{ 0 }, Vy{ 0 };
 	int zycie{ 4 };
 	char last_click='k';
-	void draw(RenderTarget& target, RenderStates state) const override;//Metoda odpowiedzialna za rysowanie
 public:
 	cBohater(double x, double y, float a, float b);
 	void uptade();
