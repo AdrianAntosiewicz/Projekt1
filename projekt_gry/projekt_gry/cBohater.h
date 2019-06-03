@@ -22,5 +22,6 @@ public:
 	void set_vy(int x) { Vy = x; };
 	bool kolizja_przeciwnik(cPrzeciwnik &R);
 	bool kolizja_przeszkoda( cPrzeszkoda &R);
+	void zranienie() { zycie -= 1; };
 	char get_last_click() { return last_click; };
 };

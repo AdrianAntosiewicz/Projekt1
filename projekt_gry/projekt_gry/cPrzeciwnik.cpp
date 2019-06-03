@@ -6,3 +6,4 @@ cPrzeciwnik::cPrzeciwnik(double x, double y, float a, float b, int life, double 
 	RectangleShape::setFillColor(Color::Green);
 	RectangleShape::setOrigin(a / 2, b / 2);
 }
+
