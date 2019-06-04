@@ -7,3 +7,9 @@ cPrzeciwnik::cPrzeciwnik(double x, double y, float a, float b, int life, double 
 	RectangleShape::setOrigin(a / 2, b / 2);
 }
 
+bool cPrzeciwnik::kolizja_przeszkoda(cPrzeszkoda &R) {
+	if (this->getGlobalBounds().intersects(R.getGlobalBounds()))
+		return true;
+	else
+		return false;
+}

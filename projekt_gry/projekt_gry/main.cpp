@@ -29,6 +29,7 @@ int main() {
 	Event event;
 	srand(time(0));
 	int frame = 0, kol=0,kol_pocisk=0, strzal=0;
+	vector<cPocisk>::iterator itr_kol;
 	while (true) {
 		frame++;
 		kol++;
@@ -56,15 +57,15 @@ int main() {
 			pociski.push_back(cPocisk(Bohater.getPosition().x, Bohater.top(), 10, 10, 0, -12));
 			strzal = 0;
 		}
-		else if (Keyboard::isKeyPressed(Keyboard::Key::Down) && strzal > 10) {
+		if (Keyboard::isKeyPressed(Keyboard::Key::Down) && strzal > 10) {
 			pociski.push_back(cPocisk(Bohater.getPosition().x, Bohater.bottom(), 10, 10, 0, 12));
 			strzal = 0;
 		}
-		else if (Keyboard::isKeyPressed(Keyboard::Key::Left) && strzal > 10) {
+		if (Keyboard::isKeyPressed(Keyboard::Key::Left) && strzal > 10) {
 			pociski.push_back(cPocisk(Bohater.left(), Bohater.getPosition().y, 10, 10, -12, 0));
 			strzal = 0;
 		}
-		else if(Keyboard::isKeyPressed(Keyboard::Key::Right) && strzal > 10) {
+		if(Keyboard::isKeyPressed(Keyboard::Key::Right) && strzal > 10) {
 			pociski.push_back(cPocisk(Bohater.right(), Bohater.getPosition().y, 10, 10, 12, 0));
 			strzal = 0;
 		}
@@ -73,25 +74,26 @@ int main() {
 			i->ruch();
 		}
 		//Sprawdzanie kolizji pociskow z obiektami
-		for (auto itr = pociski.begin(); itr != pociski.end(); itr++) {
+		vector<cPocisk>::iterator itr;
+		for (itr = pociski.begin(); itr != pociski.end(); itr++) {
 			for (int j = 0; j < pszeszkody.size(); j++) {
-				if (itr->kolizja_przeszkoda(*pszeszkody[j])) {
-					kol_pocisk = 1;
-					break;
-				}
+					if (itr->kolizja_przeszkoda(*pszeszkody[j])) {
+						kol_pocisk = 1;
+						break;
+					}
 			}
 			for (int j = 0; j < przeciwnicy.size(); j++) {
-				if (itr->kolizja_przeciwnik(*przeciwnicy[j])) {
-					kol_pocisk = 1;
-					break;
-				}
+					if (itr->kolizja_przeciwnik(*przeciwnicy[j])) {
+						kol_pocisk = 1;
+						break;
+					}
 			}
 			if (itr->kolizja_bohater(Bohater)) {
 				kol_pocisk = 1;
 			}
 			if (kol_pocisk == 1) {
-				kol_pocisk = 0;
 				pociski.erase(itr);
+				kol_pocisk = 2;
 				break;
 			}
 		}
@@ -101,7 +103,7 @@ int main() {
 			if (Bohater.kolizja_przeciwnik(*przeciwnicy[i])) {
 				if (kol > 10) {
 					kol = 0;
-					//--->Cos jeszcze mozna zrobic w kolizji, bo typ 
+					//--->Cos jeszcze mozna zrobic w kolizji, bo typ bool
 				}
 			}
 		}
@@ -109,6 +111,14 @@ int main() {
 		for (int i = 0; i < pszeszkody.size(); i++) {
 			if (Bohater.kolizja_przeszkoda(*pszeszkody[i])) {
 				//--->Cos jeszcze mozna zrobic w kolizji, bo typ bool
+			}
+		}
+		//Sprawdzanie kolizji przeciwnikow z przeszkodami
+		for (int i = 0; i < przeciwnicy.size();i++) {
+			for (int j = 0; j < pszeszkody.size(); j++) {
+				if (przeciwnicy[i]->kolizja_przeszkoda(*pszeszkody[i])) {
+					przeciwnicy[i]
+				}
 			}
 		}
 		//Rysowanie obiektów
