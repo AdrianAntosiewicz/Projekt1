@@ -1,10 +1,21 @@
 #include "cPocisk.h"
 
-cPocisk::cPocisk(double x, double y, float a, float b, double Vx, double Vy) :x_(x), y_(y), Vx(Vx), Vy(Vy) {
-	RectangleShape::setPosition(x, y);
-	RectangleShape::setSize({ a,b });
-	RectangleShape::setFillColor(Color::Blue);
-	RectangleShape::setOrigin(a / 2, b / 2);
+cPocisk::cPocisk(double x, double y, float a, double Vx, double Vy,int id) :x_(x), y_(y), Vx(Vx), Vy(Vy),id(id) {
+	CircleShape::setPosition(x, y);
+	CircleShape::setRadius({ a});
+	if (id == 1) {
+		CircleShape::setOutlineColor(Color::Blue);
+		CircleShape::setFillColor(Color::Cyan);
+		CircleShape::setOutlineThickness(4);
+	}
+	else if (id == 2) {
+		CircleShape::setOutlineColor(Color::Green);
+		CircleShape::setFillColor(Color::Red);
+		CircleShape::setOutlineThickness(3);
+	}
+
+
+	CircleShape::setOrigin(a, a);
 };
 
 bool cPocisk::kolizja_przeszkoda(cPrzeszkoda &R) {

@@ -10,7 +10,9 @@ class cBohater: public RectangleShape {
 	double x_, y_, a_, b_;
 	double Basic_velocity{ 6 }, Vx{ 0 }, Vy{ 0 };
 	int zycie{ 4 };
-	char last_click='0', strona_kolizji = '0';
+	char last_click = '0', strona_kolizji = '0', strona_kolizji2 = '0';
+	sf::Texture tekstura;
+	sf::Sprite sprajt;
 public:
 	cBohater(double x, double y, float a, float b);
 	void uptade();
@@ -20,8 +22,14 @@ public:
 	float bottom() { return RectangleShape::getPosition().y + b_ / 2; };
 	void set_vx(int x) { Vx = x; };
 	void set_vy(int x) { Vy = x; };
+	double get_vx() { return Vx; };
+	double get_vy() { return Vy; };
 	bool kolizja_przeciwnik(cPrzeciwnik &R);
 	bool kolizja_przeszkoda( cPrzeszkoda &R);
 	void zranienie() { zycie -= 1; };
 	char get_last_click() { return last_click; };
+	Sprite get_sprajt() { return sprajt; };
+	void sprajt_rotate(int x) { sprajt.setRotation(x); };
+	void set_strona_kolizji(char x) { strona_kolizji = x; };
+	void set_strona_kolizji2(char x) { strona_kolizji = x; };
 };

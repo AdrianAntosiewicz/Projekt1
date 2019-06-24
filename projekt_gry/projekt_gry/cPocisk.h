@@ -8,13 +8,19 @@
 using namespace std;
 using namespace sf;
 
-class cPocisk : public RectangleShape {
-	double x_, y_, a_, b_;
+class cPocisk : public CircleShape {
+	double x_, y_, a_;
 	double Vx, Vy;
+	int id;
+	sf::Texture tekstura;
+	sf::Sprite sprajt;
 public:
-	cPocisk(double x, double y, float a, float b,double Vx,double Vy);
+	cPocisk(double x, double y, float a,double Vx,double Vy, int id);
 	bool kolizja_przeszkoda(cPrzeszkoda &R);
 	bool kolizja_przeciwnik(cPrzeciwnik &R);
 	bool kolizja_bohater(cBohater &R);
-	void ruch() { RectangleShape::move(Vx, Vy); };
+	void ruch() { CircleShape::move(Vx, Vy); sprajt.setPosition(this->getPosition().x, this->getPosition().y);};
+	void set_id(int x) { id = x; };
+	int get_id() { return id; };
+	Sprite get_sprajt() { return sprajt; };
 };

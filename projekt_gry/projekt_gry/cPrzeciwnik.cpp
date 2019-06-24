@@ -13,3 +13,8 @@ bool cPrzeciwnik::kolizja_przeszkoda(cPrzeszkoda &R) {
 	else
 		return false;
 }
+
+void cPrzeciwnik::ruch() {
+	RectangleShape::move(Vx, Vy); 
+	sprajt.setPosition(this->getPosition().x, this->getPosition().y);
+}

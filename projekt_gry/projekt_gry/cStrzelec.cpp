@@ -1,13 +1,13 @@
-#include "cMinion.h"
+#include "cStrzelec.h"
 
-cMinion::cMinion(double x, double y, float a, float b, int life, double v) : cPrzeciwnik(x,y,a,b,life,v) {
-	tekstura.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\slime1.png");
+cStrzelec::cStrzelec(double x, double y, float a, float b, int life, double v) : cPrzeciwnik(x, y, a, b, life, v) {
+	tekstura.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\slime2.png");
 	sprajt.setTexture(tekstura);
 	sprajt.setPosition(x, y);
 	sprajt.setOrigin(a / 2, b / 2);
 }
 
-void cMinion::uptade(int x) {
+void cStrzelec::uptade(int x) {
 	if (x == 0) {
 		Vy = -Basic_velocity;
 		Vx = 0;
