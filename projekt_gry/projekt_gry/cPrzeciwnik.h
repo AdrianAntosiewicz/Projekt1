@@ -18,11 +18,16 @@ public:
 	void odbij_vy() { Vx = -Vy; };
 	double get_vx() { return Vx; };
 	double get_vy() { return Vy; };
+	double get_basic_v() { return Basic_velocity; };
+	void set_basic_v(int x) { Basic_velocity += x; };
 	int get_life() { return zycie; };
+	void set_life(int x) { zycie += x; };
 	void zranienie() { zycie -= 1; };
 	Sprite get_sprajt() { return sprajt; };
 	void ruch();
 	bool kolizja_przeszkoda(cPrzeszkoda &R);
+	void sprajt_rotate(int x) { sprajt.setRotation(x); };
+
 	float left() { return RectangleShape::getPosition().x - a_ / 2; };//Te metody zwracaj¹ wspó³rzêdne krawêdzi
 	float right() { return RectangleShape::getPosition().x + a_ / 2; };
 	float top() { return RectangleShape::getPosition().y - b_ / 2; };

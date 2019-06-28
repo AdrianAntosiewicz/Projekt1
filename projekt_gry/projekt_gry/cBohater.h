@@ -28,6 +28,7 @@ public:
 	bool kolizja_przeszkoda( cPrzeszkoda &R);
 	void zranienie() { zycie -= 1; };
 	char get_last_click() { return last_click; };
+	char get_strona_kolizji() { return strona_kolizji; };
 	Sprite get_sprajt() { return sprajt; };
 	void sprajt_rotate(int x) { sprajt.setRotation(x); };
 	void set_strona_kolizji(char x) { strona_kolizji = x; };

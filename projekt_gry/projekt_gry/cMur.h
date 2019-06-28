@@ -4,5 +4,5 @@
 class cMur :public cPrzeszkoda {
 
 public:
-	cMur(double x, double y, double a, double b);
+	cMur(double x, double y, double a, double b,int id);
 };

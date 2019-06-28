@@ -1,6 +1,6 @@
 #include "cMur.h"
 
-cMur::cMur(double x, double y, double a, double b) : cPrzeszkoda(x, y, a, b) {
+cMur::cMur(double x, double y, double a, double b,int id) : cPrzeszkoda(x, y, a, b,id) {
 	if(b>=a)
 		tekstura.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\mur_pion.png");
 	else if(a>b)
