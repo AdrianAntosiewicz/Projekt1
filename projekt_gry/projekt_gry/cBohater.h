@@ -27,10 +27,14 @@ public:
 	bool kolizja_przeciwnik(cPrzeciwnik &R);
 	bool kolizja_przeszkoda( cPrzeszkoda &R);
 	void zranienie() { zycie -= 1; };
+	int get_life() { return zycie; };
 	char get_last_click() { return last_click; };
 	char get_strona_kolizji() { return strona_kolizji; };
 	Sprite get_sprajt() { return sprajt; };
+	int get_angle() { return sprajt.getRotation(); };
 	void sprajt_rotate(int x) { sprajt.setRotation(x); };
 	void set_strona_kolizji(char x) { strona_kolizji = x; };
 	void set_strona_kolizji2(char x) { strona_kolizji = x; };
+	double get_a() { return a_; };
+	double get_b() { return b_; };
 };

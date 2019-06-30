@@ -46,7 +46,8 @@ int main() {
 	pszeszkody1.push_back(new cPrzeszkoda(1000, 500, 256, 64,1));
 	pszeszkody1.push_back(new cPrzeszkoda(1000, 800, 256, 64,1));
 	pszeszkody1.push_back(new cPrzeszkoda(1300, 192, 64, 256,1));
-	pszeszkody1.push_back(new cPrzeszkoda(1200, 500, 64, 64, 2));
+	pszeszkody1.push_back(new cPrzeszkoda(1200, 500, 50, 64, 2));
+	pszeszkody1.push_back(new cPrzeszkoda(1600, 600, 50, 64, 2));
 
 	pszeszkody2.push_back(new cPrzeszkoda(960, 32, 1920, 64, 1));
 	pszeszkody2.push_back(new cPrzeszkoda(960, 1048, 1920, 64, 1));
@@ -60,17 +61,26 @@ int main() {
 	pszeszkody3.push_back(new cPrzeszkoda(1300, 192, 64, 256, 1));
 
 	//Tekstury
-	Texture tekstura_podloga, t_wyb1, t_wyb2, t_wyb3, t_wyb4, t_wyb5, t_wyb6, t_splasz,t_menu;
+	Texture tekstura_podloga, t_wyb1, t_wyb2, t_wyb3, t_wyb4, t_wyb5, t_wyb6, t_splasz,t_menu,t_ogien1,t_ogien2,t_ogien3,t_hit;
 		tekstura_podloga.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\podloga.png");
+		t_hit.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\bohater_hit.png");
+
 		t_wyb1.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\wybuch1.png");
 		t_wyb2.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\wybuch2.png");
 		t_wyb3.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\wybuch3.png");
 		t_wyb4.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\wybuch4.png");
 		t_wyb5.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\wybuch5.png");
 		t_wyb6.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\wybuch6.png");
+
+		t_ogien1.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\ogien1.png");
+		t_ogien2.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\ogien2.png");
+		t_ogien3.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\ogien3.png");
+
 		t_splasz.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\splasz.png");
-		Sprite sprajt_podloga, s_wyb1, s_wyb2, s_wyb3, s_wyb4, s_wyb5, s_wyb6,s_menu;
+		Sprite sprajt_podloga, s_wyb1, s_wyb2, s_wyb3, s_wyb4, s_wyb5, s_wyb6,s_menu,s_ogien1,s_ogien2,s_ogien3,s_hit;
 		sprajt_podloga.setTexture(tekstura_podloga);
+		s_hit.setTexture(t_hit);
+
 		s_wyb1.setTexture(t_wyb1);
 		s_wyb2.setTexture(t_wyb2);
 		s_wyb3.setTexture(t_wyb3);
@@ -78,15 +88,19 @@ int main() {
 		s_wyb5.setTexture(t_wyb5);
 		s_wyb6.setTexture(t_wyb6);
 
+		s_ogien1.setTexture(t_ogien1);
+		s_ogien2.setTexture(t_ogien2);
+		s_ogien3.setTexture(t_ogien3);
+
 	RenderWindow window{ VideoMode(1920,1080),"Gra" };
 	window.setFramerateLimit(60);
 	Event event;
 	srand(time(0));
-	int frame_normal = 0, kol = 0, kol_pocisk = 0, strzal = 0, frame_fast = 0, frame_wybuch = 0, klatki = 0;
+	int frame_normal = 0, kol = 0, kol_pocisk = 0, strzal = 0, frame_fast = 0, frame_wybuch = 0, frame_ogien=0;
 	vector<cPocisk>::iterator itr_kol;
 	vector<Sprite> splasze;
 	int wybuch_x = -1, wybuch_y = -1;
-	int   level=1,odliczanie=1,frame_level=0;
+	int   level=1,odliczanie=1,frame_level=0, hit=1, frame_hit=0,frame_ochrona=0;
 	string stan_gry = "1_";
 	string stan_opcji = "0";
 	while (true) {
@@ -124,58 +138,99 @@ int main() {
 				stan_gry = "1_";
 			}
 			if (odliczanie == 2 ) {
-				for (int i = 0; i < 210; i++) {
+				for (int i = 0; i < 270; i++) {
 					window.display();
 					window.clear();
-					if (level == 1) {
-						window.draw(sprajt_podloga);
-						for (auto el : pszeszkody1) {
-							window.draw(el->get_sprajt());
-						}
-						for (auto el : pociski) {
-							window.draw(el);
+					if (i >= 60 && i < 270) {
+						if (level == 1) {
+							window.draw(sprajt_podloga);
+							for (auto el : pszeszkody1) {
+								if(el->get_id() == 1)
+									window.draw(el->get_sprajt());
+								if (el->get_id() == 2) {
+									s_ogien3.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+									window.draw(s_ogien3);
+								}
+									
+							}
+							for (auto el : pociski) {
+								window.draw(el);
+							}
+
+							window.draw(Bohater.get_sprajt());
+
+							for (auto el : przeciwnicy1) {
+								window.draw(el->get_sprajt());
+							}
 						}
 
-						window.draw(Bohater.get_sprajt());
+						if (level == 2) {
+							window.draw(sprajt_podloga);
+							for (auto el : pszeszkody2) {
+								window.draw(el->get_sprajt());
+							}
+							for (auto el : pociski) {
+								window.draw(el);
+							}
 
-						for (auto el : przeciwnicy1) {
-							window.draw(el->get_sprajt());
+							window.draw(Bohater.get_sprajt());
+
+							for (auto el : przeciwnicy2) {
+								window.draw(el->get_sprajt());
+							}
+						}
+
+						if (level == 3) {
+							window.draw(sprajt_podloga);
+							for (auto el : pszeszkody3) {
+								window.draw(el->get_sprajt());
+							}
+							for (auto el : pociski) {
+								window.draw(el);
+							}
+
+							window.draw(Bohater.get_sprajt());
+
+							for (auto el : przeciwnicy3) {
+								window.draw(el->get_sprajt());
+							}
 						}
 					}
 
-					if (level == 2) {
-						window.draw(sprajt_podloga);
-						for (auto el : pszeszkody2) {
-							window.draw(el->get_sprajt());
-						}
-						for (auto el : pociski) {
-							window.draw(el);
-						}
-
-						window.draw(Bohater.get_sprajt());
-
-						for (auto el : przeciwnicy2) {
-							window.draw(el->get_sprajt());
-						}
+					if (i < 60 && level==1) {
+						window.draw(s_menu);
+						Font font;
+						font.loadFromFile("arial.ttf");
+						Text tekst("Runda 1", font, 100);
+						tekst.setOutlineColor(Color::Red);
+						tekst.setOutlineThickness(5);
+						tekst.setPosition(800, 400);
+						window.draw(tekst);
 					}
 
-					if (level == 3) {
-						window.draw(sprajt_podloga);
-						for (auto el : pszeszkody3) {
-							window.draw(el->get_sprajt());
-						}
-						for (auto el : pociski) {
-							window.draw(el);
-						}
-
-						window.draw(Bohater.get_sprajt());
-
-						for (auto el : przeciwnicy3) {
-							window.draw(el->get_sprajt());
-						}
+					if (i < 60 && level == 2) {
+						window.draw(s_menu);
+						Font font;
+						font.loadFromFile("arial.ttf");
+						Text tekst("Runda 2", font, 100);
+						tekst.setOutlineColor(Color::Red);
+						tekst.setOutlineThickness(5);
+						tekst.setPosition(800, 400);
+						window.draw(tekst);
 					}
 
-					if (i < 60) {
+					if (i < 60 && level == 3) {
+						window.draw(s_menu);
+						Font font;
+						font.loadFromFile("arial.ttf");
+						Text tekst("Runda 3", font, 100);
+						tekst.setOutlineColor(Color::Red);
+						tekst.setOutlineThickness(5);
+						tekst.setPosition(800, 400);
+						window.draw(tekst);
+					}
+
+					if (i >= 60 && i<120) {
 						Font font;
 						font.loadFromFile("arial.ttf");
 						Text tekst("3", font, 100);
@@ -184,7 +239,7 @@ int main() {
 						tekst.setPosition(940, 400);
 						window.draw(tekst);
 					}
-					if (i < 120 && i>=60) {
+					if (i >= 120 && i <180) {
 						Font font;
 						font.loadFromFile("arial.ttf");
 						Text tekst("2", font, 100);
@@ -193,7 +248,7 @@ int main() {
 						tekst.setPosition(940, 400);
 						window.draw(tekst);
 					}
-					if (i < 180 && i>=120) {
+					if (i >= 180 && i<240) {
 						Font font;
 						font.loadFromFile("arial.ttf");
 						Text tekst("1", font, 100);
@@ -202,7 +257,7 @@ int main() {
 						tekst.setPosition(940, 400);
 						window.draw(tekst);
 					}
-					if (i < 210 && i >= 180) {
+					if (i >= 240 && i < 270) {
 						Font font;
 						font.loadFromFile("arial.ttf");
 						Text tekst("Start!", font, 100);
@@ -220,6 +275,10 @@ int main() {
 			if (frame_level > 0) {
 				frame_level++;
 			}
+			if (frame_hit > 0)
+				frame_hit++;
+			frame_ochrona++;
+			frame_ogien++;
 			frame_fast++;
 			frame_normal++;
 			kol++;
@@ -452,6 +511,11 @@ int main() {
 					}
 					if (itr->kolizja_bohater(Bohater)) {
 						kol_pocisk = 1;
+						frame_hit = 1;
+						if (frame_ochrona > 15) {
+							Bohater.zranienie();
+							frame_ochrona = 0;
+						}
 					}
 					if (kol_pocisk == 1) {
 						pociski.erase(itr);
@@ -494,6 +558,11 @@ int main() {
 					}
 					if (itr->kolizja_bohater(Bohater)) {
 						kol_pocisk = 1;
+						frame_hit = 1;
+						if (frame_ochrona > 15) {
+							Bohater.zranienie();
+							frame_ochrona = 0;
+						}
 					}
 					if (kol_pocisk == 1) {
 						pociski.erase(itr);
@@ -535,6 +604,11 @@ int main() {
 					}
 					if (itr->kolizja_bohater(Bohater)) {
 						kol_pocisk = 1;
+						frame_hit = 1;
+						if (frame_ochrona > 15) {
+							Bohater.zranienie();
+							frame_ochrona = 0;
+						}
 					}
 					if (kol_pocisk == 1) {
 						pociski.erase(itr);
@@ -580,14 +654,19 @@ int main() {
 							//if (Bohater.get_strona_kolizji() == 'w')
 							//	Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y + 6);
 						}
+						frame_hit = 1;
+						if (frame_ochrona > 15) {
+							Bohater.zranienie();
+							frame_ochrona = 0;
+						}
 						if (Bohater.get_last_click() == 'd')
-							Bohater.setPosition(Bohater.getPosition().x - 30, Bohater.getPosition().y);
+							Bohater.setPosition(Bohater.getPosition().x - 40, Bohater.getPosition().y);
 						if (Bohater.get_last_click() == 'a')
-							Bohater.setPosition(Bohater.getPosition().x + 30, Bohater.getPosition().y);
+							Bohater.setPosition(Bohater.getPosition().x + 40, Bohater.getPosition().y);
 						if (Bohater.get_last_click() == 's')
-							Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y - 30);
+							Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y - 40);
 						if (Bohater.get_last_click() == 'w')
-							Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y + 30);
+							Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y + 40);
 					}
 				}
 				Bohater.set_strona_kolizji('0');
@@ -628,6 +707,11 @@ int main() {
 							//	Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y - 6);
 							//if (Bohater.get_strona_kolizji() == 'w')
 							//	Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y + 6);
+						}
+						frame_hit = 1;
+						if (frame_ochrona > 15) {
+							Bohater.zranienie();
+							frame_ochrona = 0;
 						}
 						if (Bohater.get_last_click() == 'd')
 							Bohater.setPosition(Bohater.getPosition().x - 30, Bohater.getPosition().y);
@@ -678,6 +762,11 @@ int main() {
 							//if (Bohater.get_strona_kolizji() == 'w')
 							//	Bohater.setPosition(Bohater.getPosition().x, Bohater.getPosition().y + 6);
 						}
+						frame_hit = 1;
+						if (frame_ochrona > 15) {
+							Bohater.zranienie();
+							frame_ochrona = 0;
+						}
 						if (Bohater.get_last_click() == 'd')
 							Bohater.setPosition(Bohater.getPosition().x - 30, Bohater.getPosition().y);
 						if (Bohater.get_last_click() == 'a')
@@ -699,12 +788,16 @@ int main() {
 					if (Bohater.kolizja_przeciwnik(*przeciwnicy1[i])) {
 						if (kol > 10) {
 							kol = 0;
-							cout << "hit" << endl;
+							frame_hit = 1;
+							if (frame_ochrona > 15) {
+								Bohater.zranienie();
+								frame_ochrona = 0;
+							}
 							//--->Cos jeszcze mozna zrobic w kolizji, bo typ bool
 						}
 					}
 				}
-				if (Bohater.getPosition().x < 30 || Bohater.getPosition().x>1890 || Bohater.getPosition().y < 30 || Bohater.getPosition().y>1050) {
+				if ((Bohater.getPosition().x < 30 || Bohater.getPosition().x>1890 || Bohater.getPosition().y < 30 || Bohater.getPosition().y>1050) && Bohater.get_life()!=0) {
 					Bohater.setPosition(200, 200);
 				}
 			}
@@ -715,7 +808,11 @@ int main() {
 					if (Bohater.kolizja_przeciwnik(*przeciwnicy2[i])) {
 						if (kol > 10) {
 							kol = 0;
-							cout << "hit" << endl;
+							frame_hit = 1;
+							if (frame_ochrona > 15) {
+								Bohater.zranienie();
+								frame_ochrona = 0;
+							}
 							//--->Cos jeszcze mozna zrobic w kolizji, bo typ bool
 						}
 					}
@@ -731,7 +828,11 @@ int main() {
 					if (Bohater.kolizja_przeciwnik(*przeciwnicy3[i])) {
 						if (kol > 10) {
 							kol = 0;
-							cout << "hit" << endl;
+							frame_hit = 1;
+							if (frame_ochrona > 15) {
+								Bohater.zranienie();
+								frame_ochrona = 0;
+							}
 							//--->Cos jeszcze mozna zrobic w kolizji, bo typ bool
 						}
 					}
@@ -803,13 +904,39 @@ int main() {
 			//reszta
 			if (level == 1) {
 				for (auto el : pszeszkody1) {
+					if(el->get_id()==1)
 					window.draw(el->get_sprajt());
+					else if (el->get_id() == 2) {
+						s_ogien1.setPosition(el->getPosition().x - 25, el->getPosition().y-32);
+						s_ogien2.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						s_ogien3.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						if (frame_ogien < 15) {
+							window.draw(s_ogien1);
+						}
+						if (frame_ogien < 30 && frame_ogien >=15) {
+							window.draw(s_ogien2);
+						}
+						if (frame_ogien <= 45 && frame_ogien >= 30) {
+							window.draw(s_ogien3);
+						}
+						if (frame_ogien == 45)
+							frame_ogien = 0;
+
+					}
 				}
 				for (auto el : pociski) {
 					window.draw(el);
 				}
-
-				window.draw(Bohater.get_sprajt());
+				if(frame_hit==0)
+					window.draw(Bohater.get_sprajt());
+				if (frame_hit > 0 && frame_hit <= 15) {
+					s_hit.setPosition(Bohater.getPosition().x, Bohater.getPosition().y);
+					s_hit.setOrigin(Bohater.get_a() / 2, Bohater.get_b() / 2);
+					s_hit.setRotation(Bohater.get_angle());
+					window.draw(s_hit);
+					if (frame_hit == 15)
+						frame_hit = 0;
+				}
 
 				for (auto el : przeciwnicy1) {
 					window.draw(el->get_sprajt());
@@ -818,13 +945,49 @@ int main() {
 
 			if (level == 2) {
 				for (auto el : pszeszkody2) {
-					window.draw(el->get_sprajt());
+					if (el->get_id() == 1)
+						window.draw(el->get_sprajt());
+					else if (el->get_id() == 2) {
+						s_ogien1.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						s_ogien2.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						s_ogien3.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						if (frame_ogien < 15) {
+							window.draw(s_ogien1);
+						}
+						if (frame_ogien < 30 && frame_ogien >= 15) {
+							window.draw(s_ogien2);
+						}
+						if (frame_ogien <= 45 && frame_ogien >= 30) {
+							window.draw(s_ogien3);
+						}
+						if (frame_ogien == 45)
+							frame_ogien = 0;
+
+					}
 				}
 				for (auto el : pociski) {
 					window.draw(el);
 				}
 
-				window.draw(Bohater.get_sprajt());
+				if (frame_hit == 0)
+					window.draw(Bohater.get_sprajt());
+				if (frame_hit > 0 && frame_hit <= 10) {
+					s_hit.setPosition(Bohater.getPosition().x, Bohater.getPosition().y);
+					s_hit.setOrigin(Bohater.get_a() / 2, Bohater.get_b() / 2);
+					s_hit.setRotation(Bohater.get_angle());
+					window.draw(s_hit);
+					if (frame_hit == 10)
+						frame_hit = 0;
+				}
+
+				if (frame_hit > 0 && frame_hit <= 10) {
+					s_hit.setPosition(Bohater.getPosition().x, Bohater.getPosition().y);
+					s_hit.setOrigin(Bohater.get_a() / 2, Bohater.get_b() / 2);
+					s_hit.setRotation(Bohater.get_angle());
+					window.draw(s_hit);
+					if (frame_hit == 10)
+						frame_hit = 0;
+				}
 
 				for (auto el : przeciwnicy2) {
 					window.draw(el->get_sprajt());
@@ -833,13 +996,49 @@ int main() {
 
 			if (level == 3) {
 				for (auto el : pszeszkody3) {
-					window.draw(el->get_sprajt());
+					if (el->get_id() == 1)
+						window.draw(el->get_sprajt());
+					else if (el->get_id() == 2) {
+						s_ogien1.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						s_ogien2.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						s_ogien3.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+						if (frame_ogien < 15) {
+							window.draw(s_ogien1);
+						}
+						if (frame_ogien < 30 && frame_ogien >= 15) {
+							window.draw(s_ogien2);
+						}
+						if (frame_ogien <= 45 && frame_ogien >= 30) {
+							window.draw(s_ogien3);
+						}
+						if (frame_ogien == 45)
+							frame_ogien = 0;
+
+					}
 				}
 				for (auto el : pociski) {
 					window.draw(el);
 				}
 
-				window.draw(Bohater.get_sprajt());
+				if (frame_hit == 0)
+					window.draw(Bohater.get_sprajt());
+				if (frame_hit > 0 && frame_hit <= 10) {
+					s_hit.setPosition(Bohater.getPosition().x, Bohater.getPosition().y);
+					s_hit.setOrigin(Bohater.get_a() / 2, Bohater.get_b() / 2);
+					s_hit.setRotation(Bohater.get_angle());
+					window.draw(s_hit);
+					if (frame_hit == 10)
+						frame_hit = 0;
+				}
+
+				if (frame_hit > 0 && frame_hit <= 10) {
+					s_hit.setPosition(Bohater.getPosition().x, Bohater.getPosition().y);
+					s_hit.setOrigin(Bohater.get_a() / 2, Bohater.get_b() / 2);
+					s_hit.setRotation(Bohater.get_angle());
+					window.draw(s_hit);
+					if (frame_hit == 10)
+						frame_hit = 0;
+				}
 
 				for (auto el : przeciwnicy3) {
 					window.draw(el->get_sprajt());
@@ -884,6 +1083,13 @@ int main() {
 					wybuch_x = -1;
 				}
 			}
+			//Koniec bohatera
+			if (Bohater.get_life() == 0 && Bohater.getPosition().x>0) {
+				wybuch_x = Bohater.getPosition().x;
+				wybuch_y = Bohater.getPosition().y;
+				frame_wybuch = 1;
+				Bohater.setPosition(-200, -200);
+			}
 			//zmiana levelu
 			if (przeciwnicy1.size() == 0 && level == 1 && frame_level == 0)
 				frame_level = 1;
@@ -900,6 +1106,8 @@ int main() {
 				wybuch_x = -100;
 				wybuch_y = -100;
 				frame_level = 0;
+				Bohater.setPosition(200, 200);
+				Bohater.uptade();
 			}
 			if (przeciwnicy2.size() == 0&&level==2 && frame_level==120) {
 				level = 3;
@@ -907,6 +1115,8 @@ int main() {
 				splasze.clear();
 				pociski.clear();
 				frame_level = 0;
+				Bohater.setPosition(200, 200);
+				Bohater.uptade();
 			}
 			if (przeciwnicy3.size() == 0 && level ==3 && frame_level==120) {
 				cout << "Koniec gry" << endl;
