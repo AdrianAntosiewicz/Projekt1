@@ -9,7 +9,7 @@ using namespace sf;
 class cBohater: public RectangleShape {
 	double x_, y_, a_, b_;
 	double Basic_velocity{ 6 }, Vx{ 0 }, Vy{ 0 };
-	int zycie{ 4 };
+	int zycie{ 3 };
 	char last_click = '0', strona_kolizji = '0', strona_kolizji2 = '0';
 	sf::Texture tekstura;
 	sf::Sprite sprajt;

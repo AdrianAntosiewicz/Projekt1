@@ -1,7 +1,7 @@
 #include<iostream>
-#include <iostream>
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include <time.h>
 
@@ -18,6 +18,11 @@ using namespace std;
 
 
 int main() {
+	RenderWindow window{ VideoMode(1920,1080),"Gra" };
+	cBohater Bohater(300, 300, 140, 140);
+	int score = 1;
+	int strzaly = 1;
+	while(true){
 	cBohater Bohater(300, 300, 140, 140);
 	vector<cPrzeciwnik*> przeciwnicy1,przeciwnicy2,przeciwnicy3;
 	vector<cPrzeszkoda*> pszeszkody1,pszeszkody2,pszeszkody3;
@@ -61,7 +66,7 @@ int main() {
 	pszeszkody3.push_back(new cPrzeszkoda(1300, 192, 64, 256, 1));
 
 	//Tekstury
-	Texture tekstura_podloga, t_wyb1, t_wyb2, t_wyb3, t_wyb4, t_wyb5, t_wyb6, t_splasz,t_menu,t_ogien1,t_ogien2,t_ogien3,t_hit;
+	Texture tekstura_podloga, t_wyb1, t_wyb2, t_wyb3, t_wyb4, t_wyb5, t_wyb6, t_splasz,t_menu,t_ogien1,t_ogien2,t_ogien3,t_hit,t_serce;
 		tekstura_podloga.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\podloga.png");
 		t_hit.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\bohater_hit.png");
 
@@ -76,8 +81,10 @@ int main() {
 		t_ogien2.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\ogien2.png");
 		t_ogien3.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\ogien3.png");
 
+		t_serce.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\serce.png");
+
 		t_splasz.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\splasz.png");
-		Sprite sprajt_podloga, s_wyb1, s_wyb2, s_wyb3, s_wyb4, s_wyb5, s_wyb6,s_menu,s_ogien1,s_ogien2,s_ogien3,s_hit;
+		Sprite sprajt_podloga, s_wyb1, s_wyb2, s_wyb3, s_wyb4, s_wyb5, s_wyb6,s_menu,s_ogien1,s_ogien2,s_ogien3,s_hit,s_serce;
 		sprajt_podloga.setTexture(tekstura_podloga);
 		s_hit.setTexture(t_hit);
 
@@ -92,7 +99,27 @@ int main() {
 		s_ogien2.setTexture(t_ogien2);
 		s_ogien3.setTexture(t_ogien3);
 
-	RenderWindow window{ VideoMode(1920,1080),"Gra" };
+		s_serce.setTexture(t_serce);
+
+	//Muzyka
+		SoundBuffer b_laser,b_runda1,b_runda2,b_runda3,b_wybuch,b_hurt;
+		b_laser.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\laser.wav");
+		b_runda1.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\runda1.wav");
+		b_runda2.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\runda2.wav");
+		b_runda3.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\runda3.wav");
+		b_wybuch.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\wybuch.wav");
+		b_hurt.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\hurt.wav");
+		Sound laser,runda1,runda2,runda3,wybuch,hurt;
+		laser.setBuffer(b_laser);
+		runda1.setBuffer(b_runda1);
+		runda2.setBuffer(b_runda2);
+		runda3.setBuffer(b_runda3);
+		wybuch.setBuffer(b_wybuch);
+		wybuch.setVolume(50);
+		hurt.setBuffer(b_hurt);
+		hurt.setVolume(40);
+	//
+
 	window.setFramerateLimit(60);
 	Event event;
 	srand(time(0));
@@ -100,7 +127,7 @@ int main() {
 	vector<cPocisk>::iterator itr_kol;
 	vector<Sprite> splasze;
 	int wybuch_x = -1, wybuch_y = -1;
-	int   level=1,odliczanie=1,frame_level=0, hit=1, frame_hit=0,frame_ochrona=0;
+	int   level = 1, odliczanie = 1, frame_level = 0, hit = 1, frame_hit = 0, frame_ochrona = 0, muza = 1;
 	string stan_gry = "1_";
 	string stan_opcji = "0";
 	while (true) {
@@ -121,6 +148,14 @@ int main() {
 				przeciwnicy1[i]->set_life(przeciwnicy1[i]->get_life()*0.5);
 				przeciwnicy1[i]->set_basic_v(przeciwnicy1[i]->get_basic_v()*0.5);
 			}
+			for (int i = 0; i < przeciwnicy2.size(); i++) {
+				przeciwnicy2[i]->set_life(przeciwnicy2[i]->get_life()*0.5);
+				przeciwnicy2[i]->set_basic_v(przeciwnicy2[i]->get_basic_v()*0.5);
+			}
+			for (int i = 0; i < przeciwnicy3.size(); i++) {
+				przeciwnicy3[i]->set_life(przeciwnicy3[i]->get_life()*0.5);
+				przeciwnicy3[i]->set_basic_v(przeciwnicy3[i]->get_basic_v()*0.5);
+			}
 			stan_opcji = "0";
 			stan_gry = "1_";
 		}
@@ -128,6 +163,14 @@ int main() {
 			for (int i = 0; i < przeciwnicy1.size(); i++) {
 				przeciwnicy1[i]->set_life(przeciwnicy1[i]->get_life()*1.5);
 				przeciwnicy1[i]->set_basic_v(przeciwnicy1[i]->get_basic_v()*0.5);
+			}
+			for (int i = 0; i < przeciwnicy2.size(); i++) {
+				przeciwnicy2[i]->set_life(przeciwnicy2[i]->get_life()*1.5);
+				przeciwnicy2[i]->set_basic_v(przeciwnicy2[i]->get_basic_v()*0.5);
+			}
+			for (int i = 0; i < przeciwnicy3.size(); i++) {
+				przeciwnicy3[i]->set_life(przeciwnicy3[i]->get_life()*1.5);
+				przeciwnicy3[i]->set_basic_v(przeciwnicy3[i]->get_basic_v()*0.5);
 			}
 			stan_opcji = "0";
 			stan_gry = "1_";
@@ -198,6 +241,10 @@ int main() {
 					}
 
 					if (i < 60 && level==1) {
+						if (muza == 1) {
+							runda1.play();
+							muza = 2;
+						}
 						window.draw(s_menu);
 						Font font;
 						font.loadFromFile("arial.ttf");
@@ -206,9 +253,15 @@ int main() {
 						tekst.setOutlineThickness(5);
 						tekst.setPosition(800, 400);
 						window.draw(tekst);
+						if (i == 59)
+							muza = 1;
 					}
 
 					if (i < 60 && level == 2) {
+						if (muza == 1) {
+							runda2.play();
+							muza = 2;
+						}
 						window.draw(s_menu);
 						Font font;
 						font.loadFromFile("arial.ttf");
@@ -217,9 +270,15 @@ int main() {
 						tekst.setOutlineThickness(5);
 						tekst.setPosition(800, 400);
 						window.draw(tekst);
+						if (i == 59)
+							muza = 1;
 					}
 
 					if (i < 60 && level == 3) {
+						if (muza == 1) {
+							runda3.play();
+							muza = 2;
+						}
 						window.draw(s_menu);
 						Font font;
 						font.loadFromFile("arial.ttf");
@@ -449,30 +508,32 @@ int main() {
 
 			//Dodawanie pocisku
 			if (Keyboard::isKeyPressed(Keyboard::Key::Up) && strzal > 10) {
-				cout << pociski.size() << endl;
 				pociski.push_back(cPocisk(Bohater.getPosition().x + 43, Bohater.top() - 3, 10, 0, -12, 1));
-				cout << pociski.size() << endl;
 				strzal = 0;
 				Bohater.sprajt_rotate(0);
-				//Bohater.setRotation(0);
+				strzaly++;
+				laser.play();
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::Down) && strzal > 10) {
 				pociski.push_back(cPocisk(Bohater.getPosition().x - 43, Bohater.bottom() + 3, 10, 0, 12, 1));
 				strzal = 0;
 				Bohater.sprajt_rotate(180);
-				//Bohater.setRotation(180);
+				strzaly++;
+				laser.play();
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::Left) && strzal > 10) {
 				pociski.push_back(cPocisk(Bohater.left() - 2, Bohater.getPosition().y - 43, 10, -12, 0, 1));
 				strzal = 0;
 				Bohater.sprajt_rotate(270);
-				//Bohater.setRotation(270);
+				strzaly++;
+				laser.play();
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::Right) && strzal > 10) {
 				pociski.push_back(cPocisk(Bohater.right() + 2, Bohater.getPosition().y + 43, 10, 12, 0, 1));
 				strzal = 0;
 				Bohater.sprajt_rotate(90);
-				//Bohater.setRotation(90);
+				strzaly++;
+				laser.play();
 			}
 			//Ruch pociskow
 			for (auto i = pociski.begin(); i < pociski.end(); i++) {
@@ -505,6 +566,7 @@ int main() {
 								splasze.push_back(s1);
 								frame_wybuch = 1;
 								przeciwnicy1.erase(itr + j);
+								score += 1000;
 							}
 							break;
 						}
@@ -513,6 +575,7 @@ int main() {
 						kol_pocisk = 1;
 						frame_hit = 1;
 						if (frame_ochrona > 15) {
+							hurt.play();
 							Bohater.zranienie();
 							frame_ochrona = 0;
 						}
@@ -551,6 +614,7 @@ int main() {
 								splasze.push_back(s1);
 								frame_wybuch = 1;
 								przeciwnicy2.erase(itr + j);
+								score += 1000;
 							}
 
 							break;
@@ -560,6 +624,7 @@ int main() {
 						kol_pocisk = 1;
 						frame_hit = 1;
 						if (frame_ochrona > 15) {
+							hurt.play();
 							Bohater.zranienie();
 							frame_ochrona = 0;
 						}
@@ -598,6 +663,7 @@ int main() {
 								splasze.push_back(s1);
 								frame_wybuch = 1;
 								przeciwnicy3.erase(itr + j);
+								score += 1000;
 							}
 							break;
 						}
@@ -605,6 +671,7 @@ int main() {
 					if (itr->kolizja_bohater(Bohater)) {
 						kol_pocisk = 1;
 						frame_hit = 1;
+						hurt.play();
 						if (frame_ochrona > 15) {
 							Bohater.zranienie();
 							frame_ochrona = 0;
@@ -656,6 +723,7 @@ int main() {
 						}
 						frame_hit = 1;
 						if (frame_ochrona > 15) {
+							hurt.play();
 							Bohater.zranienie();
 							frame_ochrona = 0;
 						}
@@ -710,6 +778,7 @@ int main() {
 						}
 						frame_hit = 1;
 						if (frame_ochrona > 15) {
+							hurt.play();
 							Bohater.zranienie();
 							frame_ochrona = 0;
 						}
@@ -764,6 +833,7 @@ int main() {
 						}
 						frame_hit = 1;
 						if (frame_ochrona > 15) {
+							hurt.play();
 							Bohater.zranienie();
 							frame_ochrona = 0;
 						}
@@ -790,6 +860,7 @@ int main() {
 							kol = 0;
 							frame_hit = 1;
 							if (frame_ochrona > 15) {
+								hurt.play();
 								Bohater.zranienie();
 								frame_ochrona = 0;
 							}
@@ -810,6 +881,7 @@ int main() {
 							kol = 0;
 							frame_hit = 1;
 							if (frame_ochrona > 15) {
+								hurt.play();
 								Bohater.zranienie();
 								frame_ochrona = 0;
 							}
@@ -817,7 +889,7 @@ int main() {
 						}
 					}
 				}
-				if (Bohater.getPosition().x < 30 || Bohater.getPosition().x>1890 || Bohater.getPosition().y < 30 || Bohater.getPosition().y>1050) {
+				if ((Bohater.getPosition().x < 30 || Bohater.getPosition().x>1890 || Bohater.getPosition().y < 30 || Bohater.getPosition().y>1050) && Bohater.get_life()!=0) {
 					Bohater.setPosition(200, 200);
 				}
 			}
@@ -830,6 +902,7 @@ int main() {
 							kol = 0;
 							frame_hit = 1;
 							if (frame_ochrona > 15) {
+								hurt.play();
 								Bohater.zranienie();
 								frame_ochrona = 0;
 							}
@@ -837,7 +910,7 @@ int main() {
 						}
 					}
 				}
-				if (Bohater.getPosition().x < 30 || Bohater.getPosition().x>1890 || Bohater.getPosition().y < 30 || Bohater.getPosition().y>1050) {
+				if ((Bohater.getPosition().x < 30 || Bohater.getPosition().x>1890 || Bohater.getPosition().y < 30 || Bohater.getPosition().y>1050)&& Bohater.get_life()!=0) {
 					Bohater.setPosition(200, 200);
 				}
 			}
@@ -1045,8 +1118,33 @@ int main() {
 				}
 			}
 
+			//rysowanie zycia
+
+			if (Bohater.get_life() == 3) {
+				s_serce.setPosition(0, 0);
+				window.draw(s_serce);
+				s_serce.setPosition(64, 0);
+				window.draw(s_serce);
+				s_serce.setPosition(128, 0);
+				window.draw(s_serce);
+			}
+
+			if (Bohater.get_life() == 2) {
+				s_serce.setPosition(0, 0);
+				window.draw(s_serce);
+				s_serce.setPosition(64, 0);
+				window.draw(s_serce);
+			}
+
+			if (Bohater.get_life() == 1) {
+				s_serce.setPosition(0, 0);
+				window.draw(s_serce);
+			}
+
 			//rysowanie wybuchu
 			if (wybuch_x > 0) {
+				if (frame_wybuch == 4)
+					wybuch.play();
 				if (frame_wybuch < 8) {
 					s_wyb1.setOrigin(48, 48);
 					s_wyb1.setPosition(wybuch_x, wybuch_y);
@@ -1114,19 +1212,75 @@ int main() {
 				odliczanie = 2;
 				splasze.clear();
 				pociski.clear();
+				wybuch_x = -100;
+				wybuch_y = -100;
 				frame_level = 0;
 				Bohater.setPosition(200, 200);
 				Bohater.uptade();
 			}
 			if (przeciwnicy3.size() == 0 && level ==3 && frame_level==120) {
-				cout << "Koniec gry" << endl;
 				frame_level = 0;
+				wybuch_x = -100;
+				wybuch_y = -100;
+				frame_level = 0;
+				Bohater.setPosition(200, 200);
+				break;
+			}
+
+			if (Bohater.get_life() == 0 && frame_ochrona>70) {
+				break;
 			}
 
 			window.display();
 		}
 	}
+	for (int i = 0; i < 180;i++) {
+		float wynik;
+		if(Bohater.get_life()==0)
+			wynik = (float)score / (float)strzaly;
+		if (Bohater.get_life() == 1)
+			wynik = ((float)score*20) / (float)strzaly;
+		if (Bohater.get_life() == 2)
+			wynik = ((float)score * 60) / (float)strzaly;
+		if (Bohater.get_life() == 3)
+			wynik = ((float)score * 80) / (float)strzaly;
+		(int)wynik;
+		window.clear();
+		Font font;
+		font.loadFromFile("arial.ttf");
+		Text tekst,opis;
+		tekst.setFont(font);
+		tekst.setCharacterSize(100);
+		opis.setFont(font);
+		opis.setCharacterSize(40);
+		opis.setString("(Wynik zalezy od wystrzelonych pociskow, stanu zdrowia i poziomu trudnosci)");
+		if (Bohater.get_life() == 0) {
+			char s[10];
+			string str,str2="Twoj wynik:  ";
+			_itoa_s(wynik, s, 10);
+			str = s;
+			tekst.setString("    Przegrales!\n" + str2 + str);
+		}
+		if (Bohater.get_life() != 0) {
+			char s[10];
+			string str, str2 = "Twoj wynik:  ";
+			_itoa_s(wynik, s, 10);
+			str = s;
+			tekst.setString("    Wygrales!\n" + str2 + str);
+		}
 
-
+		tekst.setOutlineColor(Color::Black);
+		tekst.setOutlineThickness(5);
+		tekst.setPosition(600, 400);
+		opis.setOutlineColor(Color::Black);
+		opis.setOutlineThickness(5);
+		opis.setPosition(250, 300);
+		window.draw(tekst);
+		window.draw(opis);
+		window.display();
+	}
+	score = 1;
+	strzaly = 1;
+	}
 	return 0;
 }
