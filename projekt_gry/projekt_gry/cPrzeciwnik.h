@@ -8,7 +8,7 @@ class cPrzeciwnik:public RectangleShape{
 protected:
 	double x_, y_, a_, b_;
 	double Basic_velocity, Vx{ 0 }, Vy{ 0 };
-	int zycie;
+	int zycie,basic_life;
 	sf::Texture tekstura;
 	sf::Sprite sprajt;
 public:
@@ -21,6 +21,8 @@ public:
 	double get_basic_v() { return Basic_velocity; };
 	void set_basic_v(int x) { Basic_velocity += x; };
 	int get_life() { return zycie; };
+	int get_basic_life() { return basic_life; };
+	void set_basic_life(int x) { basic_life += x; };
 	void set_life(int x) { zycie += x; };
 	void zranienie() { zycie -= 1; };
 	Sprite get_sprajt() { return sprajt; };

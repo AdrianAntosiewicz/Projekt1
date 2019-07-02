@@ -1,9 +1,9 @@
 #include "cStrzelec.h"
 
 cStrzelec::cStrzelec(double x, double y, float a, float b, int life, double v) : cPrzeciwnik(x, y, a, b, life, v) {
-	if(v<2)
+	if(v<3)
 		tekstura.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\strzelec_normal.png");
-	if (v > 2)
+	if (v >= 3)
 		tekstura.loadFromFile("C:\\Users\\DiDson\\Desktop\\tekstury\\strzelec_fast.png");
 	sprajt.setTexture(tekstura);
 	sprajt.setPosition(x, y);

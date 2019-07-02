@@ -19,51 +19,115 @@ using namespace std;
 
 int main() {
 	RenderWindow window{ VideoMode(1920,1080),"Gra" };
-	cBohater Bohater(300, 300, 140, 140);
 	int score = 1;
 	int strzaly = 1;
 	while(true){
-	cBohater Bohater(300, 300, 140, 140);
+	cBohater Bohater(150, 150, 140, 140);
 	vector<cPrzeciwnik*> przeciwnicy1,przeciwnicy2,przeciwnicy3;
 	vector<cPrzeszkoda*> pszeszkody1,pszeszkody2,pszeszkody3;
 	vector<cPocisk> pociski;
 	//Przeciwnicy
 	przeciwnicy1.push_back(new cMinion(1000, 400, 96, 96, 2, 6));
-	przeciwnicy1.push_back(new cMinion(1000, 700, 96, 96, 2, 1));
-	przeciwnicy1.push_back(new cStrzelec(900, 700, 96, 96, 2, 1));
-	przeciwnicy1.push_back(new cStrzelec(900, 900, 96, 96, 2, 3));
-	przeciwnicy1.push_back(new cMinion(1000, 400, 96, 96, 2, 6));
-	przeciwnicy1.push_back(new cMinion(1000, 700, 96, 96, 2, 1));
-	przeciwnicy1.push_back(new cStrzelec(900, 700, 96, 96, 2, 1));
-	przeciwnicy1.push_back(new cStrzelec(900, 900, 96, 96, 2, 3));
-	przeciwnicy1.push_back(new cMinion(1000, 400, 96, 96, 2, 6));
+	przeciwnicy1.push_back(new cMinion(1800, 400, 96, 96, 2, 6));
+	przeciwnicy1.push_back(new cMinion(1800, 200, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1800, 300, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1800, 800, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1800, 900, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1000, 700, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1000, 300, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1000, 200, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(900, 200, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(700, 300, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(1000, 800, 96, 96, 3, 2));
+	przeciwnicy1.push_back(new cMinion(200, 950, 96, 96, 3, 2));
 
-	przeciwnicy2.push_back(new cMinion(1000, 700, 96, 96, 2, 1));
-	przeciwnicy2.push_back(new cStrzelec(900, 700, 96, 96, 2, 1));
-	przeciwnicy2.push_back(new cStrzelec(900, 900, 96, 96, 2, 3));
+	przeciwnicy2.push_back(new cMinion(600, 200, 96, 96, 3, 2));
+	przeciwnicy2.push_back(new cMinion(1200, 700, 96, 96, 3, 2));
+	przeciwnicy2.push_back(new cMinion(1300, 700, 96, 96, 3, 2));
+	przeciwnicy2.push_back(new cMinion(1300, 900, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cMinion(1400, 900, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cMinion(1050, 200, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cMinion(1050, 300, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cMinion(1050, 400, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cMinion(1050, 400, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cMinion(1050, 400, 96, 96, 3, 6));
+	przeciwnicy2.push_back(new cStrzelec(1050, 150, 96, 96, 2, 2));
+	przeciwnicy2.push_back(new cStrzelec(1100, 150, 96, 96, 2, 2));
+	przeciwnicy2.push_back(new cStrzelec(1200, 150, 96, 96, 2, 2));
+	przeciwnicy2.push_back(new cStrzelec(1300, 150, 96, 96, 2, 2));
+	przeciwnicy2.push_back(new cStrzelec(1100, 550, 96, 96, 2, 2));
+	przeciwnicy2.push_back(new cStrzelec(1200, 550, 96, 96, 2, 2));
+	przeciwnicy2.push_back(new cStrzelec(1300, 550, 96, 96, 2, 2));
 
 	przeciwnicy3.push_back(new cStrzelec(900, 900, 96, 96, 2, 3));
+	przeciwnicy3.push_back(new cStrzelec(1200, 900, 96, 96, 2, 3));
+	przeciwnicy3.push_back(new cStrzelec(1300, 900, 96, 96, 2, 3));
+	przeciwnicy3.push_back(new cStrzelec(1400, 900, 96, 96, 2, 3));
+	przeciwnicy3.push_back(new cStrzelec(1500, 900, 96, 96, 2, 3));
+	przeciwnicy3.push_back(new cStrzelec(1050, 150, 96, 96, 2, 2));
+	przeciwnicy3.push_back(new cStrzelec(1100, 150, 96, 96, 2, 2));
+	przeciwnicy3.push_back(new cStrzelec(1200, 150, 96, 96, 2, 2));
+	przeciwnicy3.push_back(new cStrzelec(1300, 150, 96, 96, 2, 2));
+	przeciwnicy3.push_back(new cStrzelec(1100, 550, 96, 96, 2, 2));
+	przeciwnicy3.push_back(new cMinion(200, 800, 96, 96, 3, 6));
+	przeciwnicy3.push_back(new cMinion(300, 800, 96, 96, 3, 6));
+	przeciwnicy3.push_back(new cMinion(400, 800, 96, 96, 3, 6));
+	przeciwnicy3.push_back(new cMinion(500, 800, 96, 96, 3, 6));
+	przeciwnicy3.push_back(new cMinion(600, 800, 96, 96, 3, 6));
+	przeciwnicy3.push_back(new cMinion(700, 800, 96, 96, 3, 6));
 	//Pszeszkody
 	pszeszkody1.push_back(new cPrzeszkoda(960,32,1920,64,1));
 	pszeszkody1.push_back(new cPrzeszkoda(960, 1048, 1920, 64,1));
 	pszeszkody1.push_back(new cPrzeszkoda(32, 540, 64, 1080,1));
 	pszeszkody1.push_back(new cPrzeszkoda(1888, 540, 64, 1080,1));
-	pszeszkody1.push_back(new cPrzeszkoda(1000, 500, 256, 64,1));
-	pszeszkody1.push_back(new cPrzeszkoda(1000, 800, 256, 64,1));
-	pszeszkody1.push_back(new cPrzeszkoda(1300, 192, 64, 256,1));
-	pszeszkody1.push_back(new cPrzeszkoda(1200, 500, 50, 64, 2));
-	pszeszkody1.push_back(new cPrzeszkoda(1600, 600, 50, 64, 2));
+	pszeszkody1.push_back(new cPrzeszkoda(348, 190, 64, 254,1));
+	pszeszkody1.push_back(new cPrzeszkoda(285, 792, 445, 64,1));
+	pszeszkody1.push_back(new cPrzeszkoda(1696, 540, 320, 64, 1));
+	pszeszkody1.push_back(new cPrzeszkoda(1504, 540, 64, 570, 1));
+	pszeszkody1.push_back(new cPrzeszkoda(900, 600, 50, 64, 2));
+	pszeszkody1.push_back(new cPrzeszkoda(900, 300, 50, 64, 2));
 
 	pszeszkody2.push_back(new cPrzeszkoda(960, 32, 1920, 64, 1));
 	pszeszkody2.push_back(new cPrzeszkoda(960, 1048, 1920, 64, 1));
 	pszeszkody2.push_back(new cPrzeszkoda(32, 540, 64, 1080, 1));
 	pszeszkody2.push_back(new cPrzeszkoda(1888, 540, 64, 1080, 1));
+	pszeszkody2.push_back(new cPrzeszkoda(445, 728, 952, 64, 1));
+	pszeszkody2.push_back(new cPrzeszkoda(950, 223, 64, 318, 1));
+	pszeszkody2.push_back(new cPrzeszkoda(1200, 400, 50, 64, 2));
+	pszeszkody2.push_back(new cPrzeszkoda(1250, 400, 50, 64, 2));
+	pszeszkody2.push_back(new cPrzeszkoda(1300, 400, 50, 64, 2));
+	pszeszkody2.push_back(new cPrzeszkoda(1350, 400, 50, 64, 2));
+	pszeszkody2.push_back(new cPrzeszkoda(1400, 700, 50, 64, 2));
+	pszeszkody2.push_back(new cPrzeszkoda(1450, 700, 50, 64, 2));
 
 	pszeszkody3.push_back(new cPrzeszkoda(960, 32, 1920, 64, 1));
 	pszeszkody3.push_back(new cPrzeszkoda(960, 1048, 1920, 64, 1));
 	pszeszkody3.push_back(new cPrzeszkoda(32, 540, 64, 1080, 1));
 	pszeszkody3.push_back(new cPrzeszkoda(1888, 540, 64, 1080, 1));
-	pszeszkody3.push_back(new cPrzeszkoda(1300, 192, 64, 256, 1));
+	pszeszkody3.push_back(new cPrzeszkoda(950, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1000, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1050, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1100, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1150, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1300, 300, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1350, 300, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1400, 300, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(1450, 300, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(300, 96, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(300, 160, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(300, 224, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(300, 288, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(300, 352, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(300, 416, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(96, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(146, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(196, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(246, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(296, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(346, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(396, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(446, 700, 50, 64, 2));
+	pszeszkody3.push_back(new cPrzeszkoda(496, 700, 50, 64, 2));
 
 	//Tekstury
 	Texture tekstura_podloga, t_wyb1, t_wyb2, t_wyb3, t_wyb4, t_wyb5, t_wyb6, t_splasz,t_menu,t_ogien1,t_ogien2,t_ogien3,t_hit,t_serce;
@@ -102,15 +166,24 @@ int main() {
 		s_serce.setTexture(t_serce);
 
 	//Muzyka
-		SoundBuffer b_laser,b_runda1,b_runda2,b_runda3,b_wybuch,b_hurt;
+		Music muzyka;
+		muzyka.openFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\muzyka.wav");
+		muzyka.setVolume(60);
+		SoundBuffer b_laser,b_runda1,b_runda2,b_runda3,b_wybuch,b_hurt,b_hit,b_count;
 		b_laser.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\laser.wav");
 		b_runda1.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\runda1.wav");
 		b_runda2.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\runda2.wav");
 		b_runda3.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\runda3.wav");
 		b_wybuch.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\wybuch.wav");
 		b_hurt.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\hurt.wav");
-		Sound laser,runda1,runda2,runda3,wybuch,hurt;
+		b_hit.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\hit.wav");
+		b_count.loadFromFile("C:\\Users\\DiDson\\Desktop\\dzwieki\\odliczanie.wav");
+		Sound laser,runda1,runda2,runda3,wybuch,hurt,hitt,count;
 		laser.setBuffer(b_laser);
+		count.setBuffer(b_count);
+		count.setVolume(80);
+		hitt.setBuffer(b_hit);
+		hitt.setVolume(60);
 		runda1.setBuffer(b_runda1);
 		runda2.setBuffer(b_runda2);
 		runda3.setBuffer(b_runda3);
@@ -127,7 +200,7 @@ int main() {
 	vector<cPocisk>::iterator itr_kol;
 	vector<Sprite> splasze;
 	int wybuch_x = -1, wybuch_y = -1;
-	int   level = 1, odliczanie = 1, frame_level = 0, hit = 1, frame_hit = 0, frame_ochrona = 0, muza = 1;
+	int   level = 1, odliczanie = 1, frame_level = 0, hit = 1, frame_hit = 0, frame_ochrona = 0, muza = 1,play_music=1;
 	string stan_gry = "1_";
 	string stan_opcji = "0";
 	while (true) {
@@ -144,32 +217,40 @@ int main() {
 			stan_gry = "1_";
 		}
 		if (stan_opcji == "sredni") {
+			score += 10000;
 			for (int i = 0; i < przeciwnicy1.size(); i++) {
 				przeciwnicy1[i]->set_life(przeciwnicy1[i]->get_life()*0.5);
+				przeciwnicy1[i]->set_basic_life(przeciwnicy1[i]->get_basic_life()*0.5);
 				przeciwnicy1[i]->set_basic_v(przeciwnicy1[i]->get_basic_v()*0.5);
 			}
 			for (int i = 0; i < przeciwnicy2.size(); i++) {
 				przeciwnicy2[i]->set_life(przeciwnicy2[i]->get_life()*0.5);
+				przeciwnicy2[i]->set_basic_life(przeciwnicy2[i]->get_basic_life()*0.5);
 				przeciwnicy2[i]->set_basic_v(przeciwnicy2[i]->get_basic_v()*0.5);
 			}
 			for (int i = 0; i < przeciwnicy3.size(); i++) {
 				przeciwnicy3[i]->set_life(przeciwnicy3[i]->get_life()*0.5);
+				przeciwnicy3[i]->set_basic_life(przeciwnicy3[i]->get_basic_life()*0.5);
 				przeciwnicy3[i]->set_basic_v(przeciwnicy3[i]->get_basic_v()*0.5);
 			}
 			stan_opcji = "0";
 			stan_gry = "1_";
 		}
 		if (stan_opcji == "trudny") {
+			score += 50000;
 			for (int i = 0; i < przeciwnicy1.size(); i++) {
 				przeciwnicy1[i]->set_life(przeciwnicy1[i]->get_life()*1.5);
+				przeciwnicy1[i]->set_basic_life(przeciwnicy1[i]->get_basic_life()*1.5);
 				przeciwnicy1[i]->set_basic_v(przeciwnicy1[i]->get_basic_v()*0.5);
 			}
 			for (int i = 0; i < przeciwnicy2.size(); i++) {
 				przeciwnicy2[i]->set_life(przeciwnicy2[i]->get_life()*1.5);
+				przeciwnicy2[i]->set_basic_life(przeciwnicy2[i]->get_basic_life()*1.5);
 				przeciwnicy2[i]->set_basic_v(przeciwnicy2[i]->get_basic_v()*0.5);
 			}
 			for (int i = 0; i < przeciwnicy3.size(); i++) {
 				przeciwnicy3[i]->set_life(przeciwnicy3[i]->get_life()*1.5);
+				przeciwnicy3[i]->set_basic_life(przeciwnicy3[i]->get_basic_life()*1.5);
 				przeciwnicy3[i]->set_basic_v(przeciwnicy3[i]->get_basic_v()*0.5);
 			}
 			stan_opcji = "0";
@@ -177,6 +258,7 @@ int main() {
 		}
 
 		else if (stan_gry == "2_") {
+
 			if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 				stan_gry = "1_";
 			}
@@ -184,6 +266,8 @@ int main() {
 				for (int i = 0; i < 270; i++) {
 					window.display();
 					window.clear();
+					if (i == 60)
+						count.play();
 					if (i >= 60 && i < 270) {
 						if (level == 1) {
 							window.draw(sprajt_podloga);
@@ -210,7 +294,13 @@ int main() {
 						if (level == 2) {
 							window.draw(sprajt_podloga);
 							for (auto el : pszeszkody2) {
-								window.draw(el->get_sprajt());
+								if (el->get_id() == 1)
+									window.draw(el->get_sprajt());
+								if (el->get_id() == 2) {
+									s_ogien3.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+									window.draw(s_ogien3);
+								}
+
 							}
 							for (auto el : pociski) {
 								window.draw(el);
@@ -226,7 +316,13 @@ int main() {
 						if (level == 3) {
 							window.draw(sprajt_podloga);
 							for (auto el : pszeszkody3) {
-								window.draw(el->get_sprajt());
+								if (el->get_id() == 1)
+									window.draw(el->get_sprajt());
+								if (el->get_id() == 2) {
+									s_ogien3.setPosition(el->getPosition().x - 25, el->getPosition().y - 32);
+									window.draw(s_ogien3);
+								}
+
 							}
 							for (auto el : pociski) {
 								window.draw(el);
@@ -328,7 +424,10 @@ int main() {
 				}
 				odliczanie = 1;
 			}
-
+			if (play_music == 1) {
+				muzyka.play();
+				play_music = 2;
+			}
 			if (frame_wybuch > 0)
 				frame_wybuch++;
 			if (frame_level > 0) {
@@ -360,16 +459,16 @@ int main() {
 						int los = rand() % 4;
 						przeciwnicy1[i]->uptade(los);
 						if (cStrzelec *s = dynamic_cast<cStrzelec*>(przeciwnicy1[i])) {
-							if (los == 0 && przeciwnicy1[i]->get_basic_v() < 2) {
+							if (los == 0 && przeciwnicy1[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy1[i]->getPosition().x, przeciwnicy1[i]->top() - 3, 10, 0, -12, 2));
 							}
-							if (los == 1 && przeciwnicy1[i]->get_basic_v() < 2) {
+							if (los == 1 && przeciwnicy1[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy1[i]->getPosition().x, przeciwnicy1[i]->bottom() + 3, 10, 0, 12, 2));
 							}
-							if (los == 2 && przeciwnicy1[i]->get_basic_v() < 2) {
+							if (los == 2 && przeciwnicy1[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy1[i]->left() - 2, przeciwnicy1[i]->getPosition().y, 10, -12, 0, 2));
 							}
-							if (los == 3 && przeciwnicy1[i]->get_basic_v() < 2) {
+							if (los == 3 && przeciwnicy1[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy1[i]->right() + 2, przeciwnicy1[i]->getPosition().y, 10, 12, 0, 2));
 							}
 							if (los == 0 && przeciwnicy1[i]->get_basic_v() > 2) {
@@ -410,16 +509,16 @@ int main() {
 						int los = rand() % 4;
 						przeciwnicy2[i]->uptade(los);
 						if (cStrzelec *s = dynamic_cast<cStrzelec*>(przeciwnicy2[i])) {
-							if (los == 0 && przeciwnicy2[i]->get_basic_v() < 2) {
+							if (los == 0 && przeciwnicy2[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy2[i]->getPosition().x, przeciwnicy2[i]->top() - 3, 10, 0, -12, 2));
 							}
-							if (los == 1 && przeciwnicy2[i]->get_basic_v() < 2) {
+							if (los == 1 && przeciwnicy2[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy2[i]->getPosition().x, przeciwnicy2[i]->bottom() + 3, 10, 0, 12, 2));
 							}
-							if (los == 2 && przeciwnicy2[i]->get_basic_v() < 2) {
+							if (los == 2 && przeciwnicy2[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy2[i]->left() - 2, przeciwnicy2[i]->getPosition().y, 10, -12, 0, 2));
 							}
-							if (los == 3 && przeciwnicy2[i]->get_basic_v() < 2) {
+							if (los == 3 && przeciwnicy2[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy2[i]->right() + 2, przeciwnicy2[i]->getPosition().y, 10, 12, 0, 2));
 							}
 							if (los == 0 && przeciwnicy2[i]->get_basic_v() > 2) {
@@ -460,16 +559,16 @@ int main() {
 						int los = rand() % 4;
 						przeciwnicy3[i]->uptade(los);
 						if (cStrzelec *s = dynamic_cast<cStrzelec*>(przeciwnicy3[i])) {
-							if (los == 0 && przeciwnicy3[i]->get_basic_v() < 2) {
+							if (los == 0 && przeciwnicy3[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy3[i]->getPosition().x, przeciwnicy3[i]->top() - 3, 10, 0, -12, 2));
 							}
-							if (los == 1 && przeciwnicy3[i]->get_basic_v() < 2) {
+							if (los == 1 && przeciwnicy3[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy3[i]->getPosition().x, przeciwnicy3[i]->bottom() + 3, 10, 0, 12, 2));
 							}
-							if (los == 2 && przeciwnicy3[i]->get_basic_v() < 2) {
+							if (los == 2 && przeciwnicy3[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy3[i]->left() - 2, przeciwnicy3[i]->getPosition().y, 10, -12, 0, 2));
 							}
-							if (los == 3 && przeciwnicy3[i]->get_basic_v() < 2) {
+							if (los == 3 && przeciwnicy3[i]->get_basic_v() <= 2) {
 								pociski.push_back(cPocisk(przeciwnicy3[i]->right() + 2, przeciwnicy3[i]->getPosition().y, 10, 12, 0, 2));
 							}
 							if (los == 0 && przeciwnicy3[i]->get_basic_v() > 2) {
@@ -544,7 +643,7 @@ int main() {
 				vector<cPocisk>::iterator itr;
 				for (itr = pociski.begin(); itr != pociski.end(); itr++) {
 					for (int j = 0; j < pszeszkody1.size(); j++) {
-						if (itr->kolizja_przeszkoda(*pszeszkody1[j])) {
+						if (itr->kolizja_przeszkoda(*pszeszkody1[j]) && pszeszkody1[j]->get_id()==1) {
 							kol_pocisk = 1;
 							break;
 						}
@@ -552,8 +651,10 @@ int main() {
 					for (int j = 0; j < przeciwnicy1.size(); j++) {
 						if (itr->kolizja_przeciwnik(*przeciwnicy1[j])) {
 							kol_pocisk = 1;
-							if (itr->get_id() == 1)
+							if (itr->get_id() == 1) {
 								przeciwnicy1[j]->zranienie();
+								hitt.play();
+							}
 							if (przeciwnicy1[j]->get_life() == 0)
 							{
 								auto itr = przeciwnicy1.begin();
@@ -592,7 +693,7 @@ int main() {
 				vector<cPocisk>::iterator itr;
 				for (itr = pociski.begin(); itr != pociski.end(); itr++) {
 					for (int j = 0; j < pszeszkody2.size(); j++) {
-						if (itr->kolizja_przeszkoda(*pszeszkody2[j])) {
+						if (itr->kolizja_przeszkoda(*pszeszkody2[j]) && pszeszkody2[j]->get_id() == 1) {
 							kol_pocisk = 1;
 							break;
 						}
@@ -600,8 +701,10 @@ int main() {
 					for (int j = 0; j < przeciwnicy2.size(); j++) {
 						if (itr->kolizja_przeciwnik(*przeciwnicy2[j])) {
 							kol_pocisk = 1;
-							if (itr->get_id() == 1)
+							if (itr->get_id() == 1) {
 								przeciwnicy2[j]->zranienie();
+								hitt.play();
+							}
 							if (przeciwnicy2[j]->get_life() == 0)
 							{
 								auto itr = przeciwnicy2.begin();
@@ -641,7 +744,7 @@ int main() {
 				vector<cPocisk>::iterator itr;
 				for (itr = pociski.begin(); itr != pociski.end(); itr++) {
 					for (int j = 0; j < pszeszkody3.size(); j++) {
-						if (itr->kolizja_przeszkoda(*pszeszkody3[j])) {
+						if (itr->kolizja_przeszkoda(*pszeszkody3[j]) && pszeszkody3[j]->get_id() == 1) {
 							kol_pocisk = 1;
 							break;
 						}
@@ -649,8 +752,10 @@ int main() {
 					for (int j = 0; j < przeciwnicy3.size(); j++) {
 						if (itr->kolizja_przeciwnik(*przeciwnicy3[j])) {
 							kol_pocisk = 1;
-							if (itr->get_id() == 1)
+							if (itr->get_id() == 1) {
 								przeciwnicy3[j]->zranienie();
+								hitt.play();
+							}
 							if (przeciwnicy3[j]->get_life() == 0)
 							{
 								auto itr = przeciwnicy3.begin();
@@ -1204,8 +1309,10 @@ int main() {
 				wybuch_x = -100;
 				wybuch_y = -100;
 				frame_level = 0;
-				Bohater.setPosition(200, 200);
+				Bohater.setPosition(150, 150);
 				Bohater.uptade();
+				muzyka.stop();
+				play_music = 1;
 			}
 			if (przeciwnicy2.size() == 0&&level==2 && frame_level==120) {
 				level = 3;
@@ -1215,8 +1322,10 @@ int main() {
 				wybuch_x = -100;
 				wybuch_y = -100;
 				frame_level = 0;
-				Bohater.setPosition(200, 200);
+				Bohater.setPosition(150, 150);
 				Bohater.uptade();
+				muzyka.stop();
+				play_music = 1;
 			}
 			if (przeciwnicy3.size() == 0 && level ==3 && frame_level==120) {
 				frame_level = 0;
@@ -1224,13 +1333,88 @@ int main() {
 				wybuch_y = -100;
 				frame_level = 0;
 				Bohater.setPosition(200, 200);
+				muzyka.stop();
+				play_music = 1;
 				break;
 			}
 
 			if (Bohater.get_life() == 0 && frame_ochrona>70) {
+				muzyka.stop();
 				break;
 			}
-
+			//rysowanie zdrowia przeciwnikow
+			if (level == 1) {
+				Font font;
+				font.loadFromFile("arial.ttf");
+				Text tekst;
+				tekst.setFont(font);
+				tekst.setOutlineColor(Color::Black);
+				tekst.setOutlineThickness(2);
+				for (int i = 0; i < przeciwnicy1.size(); i++)
+				{
+					tekst.setPosition(przeciwnicy1[i]->getPosition().x-20, przeciwnicy1[i]->getPosition().y-85);
+					char s1[10],s2[10];
+					_itoa_s(przeciwnicy1[i]->get_life(), s1, 10);
+					_itoa_s(przeciwnicy1[i]->get_basic_life(), s2, 10);
+					string str1=s1,str2=s2,str;
+					str = str1 + "/" + str2;
+					tekst.setString(str);
+					tekst.setFillColor(Color::Green);
+					if ((float)przeciwnicy1[i]->get_life() / (float)przeciwnicy1[i]->get_basic_life() < 0.67 && (float)przeciwnicy1[i]->get_life() / (float)przeciwnicy1[i]->get_basic_life() > 0.34)
+						tekst.setFillColor(Color::Yellow);
+					if ((float)przeciwnicy1[i]->get_life() / (float)przeciwnicy1[i]->get_basic_life() < 0.34)
+						tekst.setFillColor(Color::Red);
+					window.draw(tekst);
+				}
+			}
+			if (level == 2) {
+				Font font;
+				font.loadFromFile("arial.ttf");
+				Text tekst;
+				tekst.setFont(font);
+				tekst.setOutlineColor(Color::Black);
+				tekst.setOutlineThickness(2);
+				for (int i = 0; i < przeciwnicy2.size(); i++)
+				{
+					tekst.setPosition(przeciwnicy2[i]->getPosition().x - 20, przeciwnicy2[i]->getPosition().y - 85);
+					char s1[10], s2[10];
+					_itoa_s(przeciwnicy2[i]->get_life(), s1, 10);
+					_itoa_s(przeciwnicy2[i]->get_basic_life(), s2, 10);
+					string str1 = s1, str2 = s2, str;
+					str = str1 + "/" + str2;
+					tekst.setString(str);
+					tekst.setFillColor(Color::Green);
+					if ((float)przeciwnicy2[i]->get_life() / (float)przeciwnicy2[i]->get_basic_life() < 0.67 && (float)przeciwnicy2[i]->get_life() / (float)przeciwnicy2[i]->get_basic_life() > 0.34)
+						tekst.setFillColor(Color::Yellow);
+					if ((float)przeciwnicy2[i]->get_life() / (float)przeciwnicy2[i]->get_basic_life() < 0.34)
+						tekst.setFillColor(Color::Red);
+					window.draw(tekst);
+				}
+			}
+			if (level == 3) {
+				Font font;
+				font.loadFromFile("arial.ttf");
+				Text tekst;
+				tekst.setFont(font);
+				tekst.setOutlineColor(Color::Black);
+				tekst.setOutlineThickness(2);
+				for (int i = 0; i < przeciwnicy3.size(); i++)
+				{
+					tekst.setPosition(przeciwnicy3[i]->getPosition().x - 20, przeciwnicy3[i]->getPosition().y - 85);
+					char s1[10], s2[10];
+					_itoa_s(przeciwnicy3[i]->get_life(), s1, 10);
+					_itoa_s(przeciwnicy3[i]->get_basic_life(), s2, 10);
+					string str1 = s1, str2 = s2, str;
+					str = str1 + "/" + str2;
+					tekst.setString(str);
+					tekst.setFillColor(Color::Green);
+					if ((float)przeciwnicy3[i]->get_life() / (float)przeciwnicy3[i]->get_basic_life() < 0.67 && (float)przeciwnicy3[i]->get_life() / (float)przeciwnicy3[i]->get_basic_life() > 0.34)
+						tekst.setFillColor(Color::Yellow);
+					if ((float)przeciwnicy3[i]->get_life() / (float)przeciwnicy3[i]->get_basic_life() < 0.34)
+						tekst.setFillColor(Color::Red);
+					window.draw(tekst);
+				}
+			}
 			window.display();
 		}
 	}
