@@ -9,8 +9,8 @@ cPocisk::cPocisk(double x, double y, float a, double Vx, double Vy,int id) :x_(x
 		CircleShape::setOutlineThickness(4);
 	}
 	else if (id == 2) {
-		CircleShape::setOutlineColor(Color::Green);
-		CircleShape::setFillColor(Color::Red);
+		CircleShape::setOutlineColor(Color::Red);
+		CircleShape::setFillColor(Color::Yellow);
 		CircleShape::setOutlineThickness(3);
 	}
 

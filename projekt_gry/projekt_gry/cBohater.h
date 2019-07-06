@@ -14,7 +14,7 @@ class cBohater: public RectangleShape {
 	sf::Texture tekstura;
 	sf::Sprite sprajt;
 public:
-	cBohater(double x, double y, float a, float b);
+	cBohater(double x=0, double y=0, float a=0, float b=0);
 	void uptade();
 	float left() { return RectangleShape::getPosition().x - a_ / 2; };//Te metody zwracaj¹ wspó³rzêdne krawêdzi
 	float right() { return RectangleShape::getPosition().x + a_ / 2; };
@@ -28,6 +28,7 @@ public:
 	bool kolizja_przeszkoda( cPrzeszkoda &R);
 	void zranienie() { zycie -= 1; };
 	int get_life() { return zycie; };
+	void set_life(int x) { zycie = x; };
 	char get_last_click() { return last_click; };
 	char get_strona_kolizji() { return strona_kolizji; };
 	Sprite get_sprajt() { return sprajt; };
